@@ -1,6 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
-void main(){
+import 'package:to_do/firebase_options.dart';
+import 'package:to_do/first page.dart';
+void main() async
+{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  );
   runApp(MyApp());
 }
 
@@ -18,18 +25,3 @@ class MyApp extends StatelessWidget {
 
 
 
-class page_1 extends StatefulWidget {
-  const page_1({super.key});
-
-  @override
-  State<page_1> createState() => _page_1State();
-}
-
-class _page_1State extends State<page_1> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-
-    );
-  }
-}
