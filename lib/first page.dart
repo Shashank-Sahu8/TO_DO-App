@@ -1,9 +1,11 @@
 // ignore_for_file: camel_case_types
-
+import 'package:to_do/Sign/if_logedin.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:to_do/Sign/log_intro.dart';
+import 'package:to_do/todo.dart';
 class page_1 extends StatefulWidget {
   const page_1({super.key});
 
@@ -12,6 +14,17 @@ class page_1 extends StatefulWidget {
 }
 
 class _page_1State extends State<page_1> {
+  final FirebaseAuth _auth=FirebaseAuth.instance;
+  User? _user;
+  @override
+  void initState() {
+    super.initState();
+    _auth.authStateChanges().listen((event) {
+      setState(() {
+        _user=event;
+      });
+    });
+  }
   int c_index=0;
   List imageList =[
     'assets/todo theme.jpg',
@@ -36,7 +49,7 @@ class _page_1State extends State<page_1> {
         elevation: 0,
         actions: [
           TextButton(
-              onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>logintro()));},
+              onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>islogein()));},
               child: Text("Skip")),
         ],
 
@@ -66,14 +79,7 @@ class _page_1State extends State<page_1> {
                           backgroundColor: Color(0xff03002e),
                           child: Icon(Icons.arrow_forward_ios_sharp,color: Colors.white,),
                           onPressed: () {
-                            if (index == imageList.length-1) {
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => logintro()));
-                            }
-                            else
-                            {
-                              (context,index){return;};
-                            }
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>islogein()));
                           })
                     ],
                   ),

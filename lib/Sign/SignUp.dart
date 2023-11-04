@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:to_do/Sign/log_intro.dart';
 
 import 'login.dart';
 
@@ -16,6 +17,7 @@ class _signupState extends State<signup> {
   final formfield=GlobalKey<FormState>();
   final emailcontroller=TextEditingController();
   final passwordcontroller=TextEditingController();
+  final confirmpasswordcontroller=TextEditingController();
   bool loading=false;
   FirebaseAuth _auth=FirebaseAuth.instance;
   @override
@@ -39,7 +41,7 @@ class _signupState extends State<signup> {
             children: [
               Column(
                 children: [
-                  SizedBox(height: 80,),
+                  SizedBox(height: 50,),
                   Text("Sign Up",textAlign: TextAlign.center,style: TextStyle(fontSize: 36,fontWeight: FontWeight.w700,color: Color(0xff03002e)),),
                   SizedBox(height: 10,),
                   Image.asset('assets/key-with-padlock-icon-in-comic-style-access-login-vector-cartoon-illustration-pictogram-lock-keyhole-business-concept-splash-effect-rbc5ej-removebg-preview.png',fit: BoxFit.cover,),
@@ -73,8 +75,20 @@ class _signupState extends State<signup> {
                           decoration: InputDecoration(
                               hintText: "Password",
                               helperText: "Name@123...",
-                              icon: Icon(Bootstrap.key,color: Colors.blueGrey,)),
+                              icon: Icon(Bootstrap.keyboard,color: Colors.blueGrey,)),
                           validator: (value){if(value!.isEmpty){return 'Enter password';}return null;},
+                        ),
+                        SizedBox(height: 20,),
+                        TextFormField(
+                          keyboardType: TextInputType.text,
+                          cursorColor: Colors.blueGrey,
+                          obscureText: true,
+                          controller: confirmpasswordcontroller,
+                          decoration: InputDecoration(
+                              hintText: "Confirm Password",
+                              helperText: "Name@123...",
+                              icon: Icon(Bootstrap.keyboard,color: Colors.blueGrey,)),
+                          validator: (value){if(value!.isEmpty){return 'Enter password again';}return null;},
                         )
                       ],
                     ),
@@ -84,28 +98,31 @@ class _signupState extends State<signup> {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: ElevatedButton(
+
                     style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xff03002e),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))) ,
 
-                    onPressed: (){
-                      if(formfield.currentState!.validate()){
-                        setState(() {
-                          loading=true;
-                        });
-                        _auth.createUserWithEmailAndPassword(
-                            email: emailcontroller.text.toString(),
-                            password: passwordcontroller.text.toString()).then((value){
-                          setState(() {
-                            loading=false ;
+                    onPressed: () {
+                      if(passwordcontroller!=confirmpasswordcontroller)
+                        {
+                          Future.error(Text("Password Incorrect"));
+                        }
+                      if (formfield.currentState!.validate()) {
+                          showDialog(context: context, builder: (context) {
+                            return const Center(
+                              child: CircularProgressIndicator(),);
                           });
-                        }).onError((error, stackTrace) { utils().toastmess(error.toString());
-                        setState(() {
-                          loading=false;
-                        });});
-                      }
-                    }
+                          _auth.createUserWithEmailAndPassword(
+                              email: emailcontroller.text.toString(),
+                              password: passwordcontroller.text.toString())
+                              .then((value) {Navigator.pop(context);
+                          }).onError((error, stackTrace) {
+                            utils().toastmess(error.toString());
 
-                    , child: Expanded(child: Container(height: 50,child: loading?CircularProgressIndicator(color: Colors.white,):Row(crossAxisAlignment: CrossAxisAlignment.center,mainAxisAlignment: MainAxisAlignment.center,children: [Icon(Icons.login),SizedBox(width: 10,),Text("Sign up")],),),)),
+                          });
+                        }
+                      }
+                    , child: Expanded(child: Container(height: 50,child: Row(crossAxisAlignment: CrossAxisAlignment.center,mainAxisAlignment: MainAxisAlignment.center,children: [Icon(Icons.login),SizedBox(width: 10,),Text("Sign up")],),),)),
               ),
 
               SizedBox(height: 20,),
@@ -114,7 +131,7 @@ class _signupState extends State<signup> {
                 child: Row(mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Already have account?",style: TextStyle(fontSize: 15,color: Color(0xff03002e)),),
-                    TextButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>login()));}, child: Text("Login"))
+                    TextButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>logintro()));}, child: Text("Login"))
                   ],
                 ),
               ),

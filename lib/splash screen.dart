@@ -39,3 +39,8 @@ class _splash_screenState extends State<splash_screen> {
     );
   }
 }
+
+
+//MediaQuery.of(context).size.height*0.5;
+//MediaQuery.of(context).size.width*0.8;
+//if(MediaQuery.orientation==Orientation.portrait)return widget1; else return widget2;

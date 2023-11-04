@@ -22,14 +22,17 @@ class _loginState extends State<login> {
   final password=TextEditingController();
   final _auth=FirebaseAuth.instance;
 
-  void login(){
+  void login() async{
+    showDialog(context: context, builder: (context){return const Center(child: CircularProgressIndicator(),);});
     setState(() {
       loading=true;
     });
-    _auth.signInWithEmailAndPassword(email: emailcontroller.text, password: password.text.toString()).then((value){setState(() {
+    await _auth.signInWithEmailAndPassword(email: emailcontroller.text, password: password.text.toString()).then((value){
+      Navigator.pop(context);
+      setState(() {
       loading=false ;
     });
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>logintro()));
+    //Navigator.push(context, MaterialPageRoute(builder: (context)=>pagepage()));
     utils().toastmess(value.user!.email.toString());}).onError((error, stackTrace) {setState(() {
       loading=false;
     });debugPrint(error.toString());utils().toastmess(error.toString());});
@@ -93,7 +96,7 @@ class _loginState extends State<login> {
 
                     onPressed: (){
                       if(_formfield.currentState!.validate()){
-                        login();
+                      login();
                       }
                     }
 
@@ -102,7 +105,7 @@ class _loginState extends State<login> {
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text("Don't have account?",style: TextStyle(color: Colors.blueGrey),),
-                  TextButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>signup()));}, child: Text("Sign Up"))
+                  TextButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>logintro()));}, child: Text("Sign Up"))
                 ],
               )
             ],
