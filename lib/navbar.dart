@@ -61,10 +61,9 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.white,
+      backgroundColor:  Color(0xfffeebe6),
       child: ListView(
         children: [UserAccountsDrawerHeader(
-
           accountName:
           getname(),
           accountEmail:
@@ -74,7 +73,7 @@ class _NavBarState extends State<NavBar> {
             backgroundColor: Colors.blueGrey,
           ),
           decoration: BoxDecoration(
-            color:Colors.black,
+            color:Color(0xff03002e),
 
           ),
         ),

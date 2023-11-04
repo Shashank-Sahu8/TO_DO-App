@@ -124,26 +124,22 @@ class _logintroState extends State<logintro> {
                 ],
               ),
             ),
-            SizedBox(height: 15,),
+            SizedBox(height: 5,),
             Row(mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FloatingActionButton.small(
-                  elevation: 2,
+                 ElevatedButton(
                   onPressed: () {
                     showDialog(context: context, builder: (context){return const Center(child: CircularProgressIndicator(),);});
                     AuthServices().signInWithGoogle();
                     Navigator.pop(context);
                   },
-                  backgroundColor: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: Image.asset('assets/google_icon.png', height: 42),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset('assets/google_icon.png', height: 35),
+                      Text("Sign up with Google",style: TextStyle(color: Color(0xff03002e),fontSize: 13),)
+                    ],
                   ),),
-                FloatingActionButton.small(
-                  elevation: 2,
-                  onPressed: () {},
-                  backgroundColor: Colors.white,
-                  child: Icon(Bootstrap.facebook,size: 30, color: Color(0xff03002e),),),
               ],
             )
 

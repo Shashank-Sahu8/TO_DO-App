@@ -18,18 +18,14 @@ class _pagepageState extends State<pagepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>show_event()));},child: Icon(Icons.add),),
+      backgroundColor: Color(0xfffeebe6),
+      floatingActionButton: FloatingActionButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>show_event()));},child: Icon(Icons.add),backgroundColor:Color(0xff03002e) ),
       drawer: NavBar(),
-      appBar: AppBar(title: Text("To_Do"),),
+      appBar: AppBar(title: Text("To_Do"),backgroundColor: Color(0xff03002e),),
       body: Center(child: Column(mainAxisAlignment: MainAxisAlignment.center,
         children: [
            Text("hello"),
-          // MaterialButton(
-          //   onPressed: ()async{
-          //     // LocalNotifications.showSimpleNotification(title: 'To_Do',body: 'Successful Log In',payload: 'hello');
-          //     await _auth.signOut();
-          //     Navigator.push(context, MaterialPageRoute(builder: (context)=>logintro()));
-          //    },child: Text("Sign Out"),)
+
         ],
       ),
       ),
