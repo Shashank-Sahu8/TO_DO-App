@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:to_do/Sign/forgetpassword.dart';
 import 'package:to_do/Sign/log_intro.dart';
 import 'package:to_do/todo.dart';
 
+import '../notification.dart';
 import 'SignUp.dart';
 
 class login extends StatefulWidget {
@@ -28,12 +30,16 @@ class _loginState extends State<login> {
       loading=true;
     });
     await _auth.signInWithEmailAndPassword(email: emailcontroller.text, password: password.text.toString()).then((value){
+      utils().toastmess("Login Successfully");
       Navigator.pop(context);
+      //LocalNotifications.showSimpleNotification(title: 'To_Do',body: 'Successful Log In',payload: 'hello');
       setState(() {
       loading=false ;
     });
     //Navigator.push(context, MaterialPageRoute(builder: (context)=>pagepage()));
-    utils().toastmess(value.user!.email.toString());}).onError((error, stackTrace) {setState(() {
+    utils().toastmess(value.user!.email.toString());}).onError((error, stackTrace) {
+      setState(() {
+        Navigator.pop(context);
       loading=false;
     });debugPrint(error.toString());utils().toastmess(error.toString());});
   }
@@ -89,9 +95,16 @@ class _loginState extends State<login> {
                     ),
                   )
               ),
-              SizedBox(height: 20,),
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.only(right: 10.0),
+                child: Row(mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>forgetpass()));}, child: Text("Forget Password?")),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left:20.0,top: 10,right: 20.0,bottom: 20.0),
                 child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color(0xff03002e),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))) ,
 
                     onPressed: (){

@@ -45,8 +45,10 @@ class _logintroState extends State<logintro> {
         child: Column(crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 20,),
-            Container(
-              child: Image.asset('assets/img-removebg-preview.png'),
+            Expanded(
+              child: Container(
+                child: Image.asset('assets/img-removebg-preview.png'),
+              ),
             ),
             SizedBox(height: 20,),
             Text("Welcome", style: TextStyle(color: Color(0xff03002e),
@@ -130,7 +132,7 @@ class _logintroState extends State<logintro> {
                   onPressed: () {
                     showDialog(context: context, builder: (context){return const Center(child: CircularProgressIndicator(),);});
                     AuthServices().signInWithGoogle();
-                    Navigator.pop(context);Navigator.pop(context);
+                    Navigator.pop(context);
                   },
                   backgroundColor: Colors.white,
                   child: Padding(

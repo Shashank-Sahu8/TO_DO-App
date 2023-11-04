@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:to_do/Sign/log_intro.dart';
-
+import 'package:to_do/notification.dart';
 import 'login.dart';
 
 class signup extends StatefulWidget {
@@ -115,7 +115,10 @@ class _signupState extends State<signup> {
                           _auth.createUserWithEmailAndPassword(
                               email: emailcontroller.text.toString(),
                               password: passwordcontroller.text.toString())
-                              .then((value) {Navigator.pop(context);
+                              .then((value) {
+                                utils().toastmess("Sign Up successfully");
+                                Navigator.pop(context);
+                                //LocalNotifications.showSimpleNotification(title: 'To_Do',body: 'Successful Log In',payload: 'hello');
                           }).onError((error, stackTrace) {
                             utils().toastmess(error.toString());
 
