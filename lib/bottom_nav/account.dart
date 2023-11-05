@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class account extends StatefulWidget {
   const account({super.key});
@@ -72,12 +74,21 @@ class _accountState extends State<account> {
             ],
           ),
         ),
-
-        Row(
-          children: [
-            Icon(Icons.logout),
-            TextButton(onPressed: (){_auth.signOut();}, child: Text("Log Out"))
-          ],
+        SizedBox(height: 10,),
+        Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Row(
+            children: [
+              Icon(Icons.logout),
+              TextButton(onPressed: (){_auth.signOut();
+              QuickAlert.show(
+                context: context,
+                type: QuickAlertType.success,
+                text: 'Logged Out',
+              );
+              }, child: Text("Log Out"))
+            ],
+          ),
         )
 
 
