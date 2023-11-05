@@ -27,6 +27,7 @@ class _descriptionState extends State<description> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff03002e),
         appBar: AppBar(
         leading: BackButton(color: Color(0xff03002e),),
           elevation: 1,
