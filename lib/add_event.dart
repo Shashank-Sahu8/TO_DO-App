@@ -8,8 +8,8 @@ import 'package:icons_plus/icons_plus.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 class show_event extends StatefulWidget {
-  const show_event({super.key, required this.titleupdated, required this.descriptionupdated});
-  final String titleupdated,descriptionupdated;
+  const show_event({super.key, required this.titleupdated, required this.descriptionupdated, required this.timetime});
+  final String titleupdated,descriptionupdated,timetime;
   @override
   State<show_event> createState() => _show_eventState();
 }
@@ -18,26 +18,28 @@ String uid=_auth.currentUser!.uid;
 class _show_eventState extends State<show_event> {
   var titlecontroller=TextEditingController();
   var descriptioncontroller=TextEditingController();
-
+  var time=DateTime.now();
   @override
   initState(){
     super.initState();
     titlecontroller=TextEditingController(text:widget.titleupdated!=''? widget.titleupdated:'');
     descriptioncontroller=TextEditingController(text: widget.descriptionupdated!=''?widget.descriptionupdated:'');
   }
+
   addtasktofirebase() async{
     // final _auth=FirebaseAuth.instance;
     // String uid=_auth.currentUser!.uid;
-    var time=DateTime.now();
+    //var time=DateTime.now();
     await FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').doc(time.toString()).set({'title':titlecontroller.text,'description':descriptioncontroller.text,'time':time.toString(),'timestamp':time});
     Fluttertoast.showToast(msg: 'Data Added');
   }
 
   updatetasktofirebase()async{
 
-    var time=DateTime.now();
-    await FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').doc(time.toString()).update({'title':titlecontroller.text,'description':descriptioncontroller.text,'time':time.toString(),'timestamp':time});
+    //var time=DateTime.now();
     Fluttertoast.showToast(msg: 'Updated Successfully');
+    await FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').doc(widget.timetime).update({'title':titlecontroller.text,'description':descriptioncontroller.text,'time':time.toString(),'timestamp':time});
+
   }
 
 

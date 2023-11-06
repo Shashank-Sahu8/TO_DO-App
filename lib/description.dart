@@ -27,10 +27,11 @@ class _descriptionState extends State<description> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff03002e),
+      backgroundColor: Color(0xfffeebe6),
         appBar: AppBar(
         leading: BackButton(color: Color(0xff03002e),),
           elevation: 1,
+          title: Text("Description",style: GoogleFonts.lato(fontSize: 26,fontWeight:FontWeight.w900,color: Color(0xff03002e)),),
           // actions: [IconButton( onPressed:(){
           //    FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').doc(widget.time).delete();
           //   Navigator.pop(context);

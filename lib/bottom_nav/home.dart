@@ -36,7 +36,7 @@ class _homepageState extends State<homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>show_event(titleupdated: '', descriptionupdated: '',)));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>show_event(titleupdated: '', descriptionupdated: '', timetime: '',)));
         },child: Icon(Icons.add),backgroundColor:Color(0xff03002e) ),
       backgroundColor: Color(0xfffeebe6),
       appBar: AppBar(
@@ -86,11 +86,12 @@ class _homepageState extends State<homepage> {
                                           Column(crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(DateFormat.yMd().add_jm().format(time)),
+                                              //Text((docs[index]['time']).toString()),
                                               Text(docs[index]['title'],style: GoogleFonts.roboto(fontSize: 19,fontWeight: FontWeight.bold,color: Color(0xff03002e)))
                                             ],
                                           ),
                                           Expanded(child: SizedBox(width: 100,)),
-                                          IconButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>show_event(titleupdated: docs[index]['title'], descriptionupdated: docs[index]['description'])));}, icon: Icon(Icons.edit)),
+                                          IconButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>show_event(titleupdated: docs[index]['title'], descriptionupdated: docs[index]['description'], timetime: (docs[index]['time']).toString(),)));}, icon: Icon(Icons.edit)),
                                           IconButton(onPressed: (){
                                             showDialog(context: context, builder: (context){
                                               return AlertDialog(
