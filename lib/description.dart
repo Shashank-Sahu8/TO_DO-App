@@ -51,12 +51,13 @@ class _descriptionState extends State<description> {
               SizedBox(height: 10,),
               Divider(),
               SizedBox(height: 10,),
-              Text("Description : "),
+              Text("Task Description : "),
               SizedBox(height: 5,),
               Expanded(child: Padding(
-                padding: const EdgeInsets.only(left:10.0),
+                padding: const EdgeInsets.only(left:100.0),
                 child: Text(widget.des,style: TextStyle(fontSize: 18),),
-              ))
+
+              )),
             ],
           ),
         ),

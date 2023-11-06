@@ -19,7 +19,7 @@ class Search extends SearchDelegate{
 
   @override
   Widget? buildLeading(BuildContext context) {
-    return IconButton(onPressed: (){close(context, null);}, icon: const Icon(Icons.arrow_back));
+    return IconButton(onPressed: (){Navigator.pop(context);}, icon: const Icon(Icons.arrow_back));
   }
   @override
   Widget buildSuggestions(BuildContext context) {
@@ -30,7 +30,7 @@ class Search extends SearchDelegate{
       return ListView.builder(
         itemCount: docss.length,
         itemBuilder: (context,index){
-          // final docs=query.isEmpty?docss:docss.where((p)=>p[index]['title'].toString().startsWith(query[0].toUpperCase())).toList();
+           //final docs=query.isEmpty?docss:docss.where((p)=>p[index]['title'].toString().startsWith(query[0].toUpperCase())).toList();
            var time=(docss[index]['timestamp'] as Timestamp).toDate();
           // return docs.isEmpty?Padding(
           //   padding: const EdgeInsets.all(10.0),
