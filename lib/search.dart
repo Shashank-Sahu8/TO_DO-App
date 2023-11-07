@@ -30,13 +30,12 @@ class Search extends SearchDelegate{
       return ListView.builder(
         itemCount: docss.length,
         itemBuilder: (context,index){
-           //final docs=query.isEmpty?docss:docss.where((p)=>p[index]['title'].toString().startsWith(query[0].toUpperCase())).toList();
+           final docs=query.isEmpty?docss:docss[index]['title'].toString().startsWith(query[0].toUpperCase());
            var time=(docss[index]['timestamp'] as Timestamp).toDate();
-          // return docs.isEmpty?Padding(
-          //   padding: const EdgeInsets.all(10.0),
-          //   child: Text('No such result found...',style: TextStyle(color: Colors.grey,fontSize: 18),),
-          // ):
-          return ListTile(
+          return docss.isEmpty?Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text('No such result found...',style: TextStyle(color: Colors.grey,fontSize: 18),),
+          ): ListTile(
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>description(title:docss[index]['title'], des: docss[index]['description'], time: DateFormat.yMd().add_jm().format(time) ,)));
             },

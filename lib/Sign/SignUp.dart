@@ -118,7 +118,7 @@ class _signupState extends State<signup> {
                               .then((value) {
                                 utils().toastmess("Sign Up successfully");
                                 Navigator.pop(context);
-                                //LocalNotifications.showSimpleNotification(title: 'To_Do',body: 'Successful Log In',payload: 'hello');
+                               // LocalNotifications.showSimpleNotification(title: 'To_Do',body: 'Successful Log In',payload: 'hello');
                           }).onError((error, stackTrace) {
                             utils().toastmess(error.toString());
 

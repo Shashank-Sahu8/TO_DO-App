@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-
+import 'package:to_do/notification.dart';
 class account extends StatefulWidget {
   const account({super.key});
 
@@ -74,22 +74,27 @@ class _accountState extends State<account> {
             ],
           ),
         ),
-        SizedBox(height: 10,),
+        SizedBox(height: 5,),
+        Divider(),
         Padding(
           padding: const EdgeInsets.all(30.0),
           child: Row(
             children: [
-              Icon(Icons.logout),
-              TextButton(onPressed: (){_auth.signOut();
+              Icon(Icons.power_settings_new_rounded),
+              SizedBox(width: 5,),
+              TextButton(onPressed: (){
+                //LocalNotifications.showSimpleNotification(title: 'To_Do',body: 'Successful Log Out',payload: 'hello');
+                _auth.signOut();
               QuickAlert.show(
                 context: context,
                 type: QuickAlertType.success,
                 text: 'Logged Out',
               );
-              }, child: Text("Log Out"))
+              }, child: Text("Log Out",style:TextStyle(fontSize: 17),))
             ],
           ),
-        )
+        ),
+
 
 
       ],

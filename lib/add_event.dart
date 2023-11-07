@@ -38,7 +38,7 @@ class _show_eventState extends State<show_event> {
 
     //var time=DateTime.now();
     Fluttertoast.showToast(msg: 'Updated Successfully');
-    await FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').doc(widget.timetime).update({'title':titlecontroller.text,'description':descriptioncontroller.text,'time':time.toString(),'timestamp':time});
+    await FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').doc(widget.timetime).update({'title':titlecontroller.text,'description':descriptioncontroller.text,});
 
   }
 
@@ -46,11 +46,11 @@ class _show_eventState extends State<show_event> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor:Color(0xfffeebe6),
-        appBar: AppBar(elevation: 3,backgroundColor: Color(0xfffeebe6),
-          leading: BackButton(color: Color(0xff03002e),),
-          title: Text(widget.titleupdated!=''?'Update Task':'New Task',style:TextStyle(color: Color(0xff03002e),fontWeight: FontWeight.w600,fontSize: 26),),
-        ),
+      backgroundColor:Color(0xfffeebe6),
+      appBar: AppBar(elevation: 3,backgroundColor: Color(0xfffeebe6),
+        leading: BackButton(color: Color(0xff03002e),),
+        title: Text(widget.titleupdated!=''?'Update Task':'New Task',style:TextStyle(color: Color(0xff03002e),fontWeight: FontWeight.w600,fontSize: 26),),
+      ),
       body: Column(
         children: [
           Padding(
@@ -79,7 +79,7 @@ class _show_eventState extends State<show_event> {
                     cursorColor: Colors.blueGrey,
                     controller: descriptioncontroller,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                        border: OutlineInputBorder(),
                         hintText: "Description",
                         icon: Icon(Bootstrap.keyboard,color: Colors.blueGrey,)),
                   ),
@@ -101,7 +101,7 @@ class _show_eventState extends State<show_event> {
                       widget.titleupdated!=''?updatetasktofirebase():addtasktofirebase();
                       //updatetasktofirebase();
                       //addtasktofirebase();
-                        Navigator.pop(context);
+                      Navigator.pop(context);
                     },
                   ),
                 )
