@@ -30,7 +30,7 @@ class _show_eventState extends State<show_event> {
     // final _auth=FirebaseAuth.instance;
     // String uid=_auth.currentUser!.uid;
     //var time=DateTime.now();
-    await FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').doc(time.toString()).set({'title':titlecontroller.text,'description':descriptioncontroller.text,'time':time.toString(),'timestamp':time});
+    await FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').doc(time.toString()).set({'title':titlecontroller.text,'description':descriptioncontroller.text,'time':time.toString(),'timestamp':time,'state':false});
     Fluttertoast.showToast(msg: 'Data Added');
   }
 

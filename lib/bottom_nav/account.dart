@@ -34,7 +34,7 @@ class _accountState extends State<account> {
     }
     else
     {
-      return Text("Unknown User",style: TextStyle(color:Color(0xff03002e),fontWeight: FontWeight.w600,fontSize: 21));
+      return Text("No Name",style: TextStyle(color:Color(0xff03002e),fontWeight: FontWeight.w600,fontSize: 21));
     }
   }
   getemail()

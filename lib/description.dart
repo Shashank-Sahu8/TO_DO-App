@@ -1,11 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class description extends StatefulWidget {
-  const description({super.key, required this.title, required this.des, required this.time});
-  final String title,des,time;
+  const description({super.key, required this.title, required this.des, required this.time, required this.state});
+  final String title,des,time,state;
   @override
   State<description> createState() => _descriptionState();
 }
@@ -22,6 +23,22 @@ class _descriptionState extends State<description> {
     setState(() {
       uid=_auth.currentUser!.uid;
     });
+  }
+
+  addcompletedtasktofirebase() async{
+     final _auth=FirebaseAuth.instance;
+     String uid=_auth.currentUser!.uid;
+    var timee=DateTime.now();
+    await FirebaseFirestore.instance.collection('tasks').doc(uid).collection('completedtasks').doc(timee.toString()).set({'title':widget.title.toString(),'description':widget.des.toString(),'time':timee.toString(),'timestamp':timee});
+     widget.state.toString()=='true'?Fluttertoast.showToast(msg: 'Task set to Incomplete'):Fluttertoast.showToast(msg: 'Task Completed');
+  }
+
+  updatecompletetasktofirebase()async{
+
+    //var time=DateTime.now();
+    //Fluttertoast.showToast(msg: 'Updated Successfully');
+    await FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').doc(widget.time).update({'state':widget.state!='true'?true:false});
+
   }
 
   @override
@@ -56,8 +73,24 @@ class _descriptionState extends State<description> {
               Expanded(child: Padding(
                 padding: const EdgeInsets.only(left:100.0),
                 child: Text(widget.des,style: TextStyle(fontSize: 18),),
-
               )),
+              Expanded(child: SizedBox(height: 2000,)),
+              Row(mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(onPressed: (){
+                    addcompletedtasktofirebase();
+                    updatecompletetasktofirebase();
+                    Navigator.pop(context);
+                  },
+                      style: ElevatedButton.styleFrom(backgroundColor: Color(0xff03002e),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),minimumSize: Size(100, 45)),
+                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      widget.state.toString()=='true'?Icon(Icons.question_mark_sharp):Icon(Icons.done_all_rounded),
+                      widget.state.toString()=='true'?Text("Task Still Left"):Text("Task Completed"),
+                    ],
+                  )),
+                ],
+              )
             ],
           ),
         ),

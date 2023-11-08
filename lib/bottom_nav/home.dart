@@ -111,7 +111,7 @@ class _homepageState extends State<homepage> {
                       },
                       key: Key(index.toString()),
                       child: InkWell(
-                        onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>description(title:docs[index]['title'], des: docs[index]['description'], time: DateFormat.yMd().add_jm().format(time) ,)));},
+                        onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>description(title:docs[index]['title'], des: docs[index]['description'], time:docs[index]['time'], state: docs[index]['state'].toString() ,)));},
                         child: Padding(
                           padding: const EdgeInsets.only(top:15.0),
                           child: Container(
@@ -130,10 +130,12 @@ class _homepageState extends State<homepage> {
                                           children: [
                                             Text(DateFormat.yMd().add_jm().format(time)),
                                             //Text((docs[index]['time']).toString()),
-                                            Text(docs[index]['title'],style: GoogleFonts.roboto(fontSize: 19,fontWeight: FontWeight.bold,color: Color(0xff03002e)))
+                                            docs[index]['state'].toString()=='false'?Container(child: Text(docs[index]['title'].toString().length<13?docs[index]['title'].toString():(docs[index]['title'].toString().substring(0,13)+'....'),style: GoogleFonts.roboto(fontSize: 19,fontWeight: FontWeight.bold,color: Color(0xff03002e)))):Text(docs[index]['title'].toString().length<13?docs[index]['title'].toString():(docs[index]['title'].toString().substring(0,13)+'....'),style: GoogleFonts.roboto(decoration: TextDecoration.lineThrough,fontSize: 19,fontWeight: FontWeight.bold,color: Color(0xff03002e)))
                                           ],
                                         ),
+
                                         Expanded(child: SizedBox(width: 100,)),
+                                        docs[index]['state'].toString()!='false'?Icon(Bootstrap.check2_circle,color: Color(0xff027148),):Icon(Icons.pending_actions),
                                         IconButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>show_event(titleupdated: docs[index]['title'], descriptionupdated: docs[index]['description'], timetime: (docs[index]['time']).toString(),)));}, icon: Icon(Icons.edit)),
                                         IconButton(onPressed: (){
                                           showDialog(context: context, builder: (context){

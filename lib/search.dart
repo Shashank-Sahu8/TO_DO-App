@@ -37,7 +37,7 @@ class Search extends SearchDelegate{
             child: Text('No such result found...',style: TextStyle(color: Colors.grey,fontSize: 18),),
           ): ListTile(
             onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>description(title:docss[index]['title'], des: docss[index]['description'], time: DateFormat.yMd().add_jm().format(time) ,)));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>description(title:docss[index]['title'], des: docss[index]['description'], time: DateFormat.yMd().add_jm().format(time), state: '' ,)));
             },
             title: Padding(
               padding: const EdgeInsets.only(top:6.0,),
