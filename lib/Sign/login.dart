@@ -113,7 +113,7 @@ class _loginState extends State<login> {
                       }
                     }
 
-                    , child: Expanded(child: Container(height: 50,child: Row(crossAxisAlignment: CrossAxisAlignment.center,mainAxisAlignment: MainAxisAlignment.center,children: [Icon(Icons.login),SizedBox(width: 10,),Text("Login")],),),)),
+                    , child: Container(height: 50,child: Row(crossAxisAlignment: CrossAxisAlignment.center,mainAxisAlignment: MainAxisAlignment.center,children: [Icon(Icons.login),SizedBox(width: 10,),Text("Login")],),)),
               ),
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
