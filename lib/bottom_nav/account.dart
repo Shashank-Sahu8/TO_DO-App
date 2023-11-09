@@ -22,7 +22,7 @@ class _accountState extends State<account> {
     }
     else
     {
-      return AssetImage('assets/9440461-removebg-preview.png');
+      return AssetImage('assets/useruserimg-removebg-preview.png');
     }
   }
 

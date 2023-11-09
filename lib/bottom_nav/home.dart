@@ -21,6 +21,7 @@ class homepage extends StatefulWidget {
 
 class _homepageState extends State<homepage> {
   bool sort=true;
+  int c=0;
   String uid='';
   @override
   void initState() {
@@ -56,7 +57,12 @@ class _homepageState extends State<homepage> {
           IconButton(onPressed: (){showSearch(context: context, delegate: Search());}, icon: Icon(Icons.search,color: Color(0xff03002e),)),
           SizedBox(width: 10,),
         ],
-        title: Text('Tasks',style: GoogleFonts.lato(fontSize: 26,fontWeight:FontWeight.w900,color: Color(0xff03002e)),),
+        title: Row(
+          children: [
+            Text(c.toString()),
+            Text('Tasks',style: GoogleFonts.lato(fontSize: 26,fontWeight:FontWeight.w900,color: Color(0xff03002e)),),
+          ],
+        ),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,
@@ -70,6 +76,7 @@ class _homepageState extends State<homepage> {
             else
             {
               final docs=snapshots.data!.docs;
+              //c=docs.length;
               return Padding(
                 padding: const EdgeInsets.only(left: 8.0,right: 8.0,top: 15,),
                 child: ListView.builder(
@@ -109,7 +116,7 @@ class _homepageState extends State<homepage> {
                           });
                         }
                       },
-                      key: Key(index.toString()),
+                      key: UniqueKey(),
                       child: InkWell(
                         onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>description(title:docs[index]['title'], des: docs[index]['description'], time:docs[index]['time'], state: docs[index]['state'].toString() ,)));},
                         child: Padding(
@@ -125,7 +132,7 @@ class _homepageState extends State<homepage> {
                                     child: Row(
                                       children: [
                                         Icon(Icons.do_not_disturb_on_total_silence_outlined,size: 10,),
-                                        SizedBox(width: 10,),
+                                        SizedBox(width: 20,),
                                         Column(crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(DateFormat.yMd().add_jm().format(time)),
@@ -136,25 +143,68 @@ class _homepageState extends State<homepage> {
 
                                         Expanded(child: SizedBox(width: 100,)),
                                         docs[index]['state'].toString()!='false'?Icon(Bootstrap.check2_circle,color: Color(0xff027148),):Icon(Icons.pending_actions),
-                                        IconButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>show_event(titleupdated: docs[index]['title'], descriptionupdated: docs[index]['description'], timetime: (docs[index]['time']).toString(),)));}, icon: Icon(Icons.edit)),
                                         IconButton(onPressed: (){
                                           showDialog(context: context, builder: (context){
                                             return AlertDialog(
-                                              iconColor: Color(0xff03002e),
-                                              title: Text('Delete item?'),
+                                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
                                               actions: [
-                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color(0xff03002e),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),onPressed: (){ FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').doc(docs[index]['time']).delete();Fluttertoast.showToast(msg: 'Item Deleted');Navigator.pop(context);}, child:Text('Delete') ),
-                                                ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color(0xff03002e),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),onPressed: (){Navigator.pop(context);}, child: Text('Cancel'))
+                                                CupertinoDialogAction(onPressed: (){
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>show_event(titleupdated: docs[index]['title'], descriptionupdated: docs[index]['description'], timetime: (docs[index]['time']).toString(),)));
+                                                }, child: Center(
+                                                  child: Row(
+                                                    children: [
+                                                      SizedBox(width: 140,),
+                                                      Icon(Icons.edit,size: 40,),
+                                                      SizedBox(width: 20,),
+                                                      Text("Edit",style: TextStyle(color:Color(0xff03002e),fontSize: 30)),
+                                                    ],
+                                                  ),
+                                                ),),Divider(),
+                                                CupertinoDialogAction(onPressed: (){
+                                                  showDialog(context: context, builder: (context){
+                                                    return AlertDialog(
+                                                      iconColor: Color(0xff03002e),
+                                                      title: Text('Delete item?'),
+                                                      actions: [
+                                                        ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color(0xff03002e),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),onPressed: (){ FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').doc(docs[index]['time']).delete();Fluttertoast.showToast(msg: 'Item Deleted');Navigator.pop(context);Navigator.pop(context);}, child:Text('Delete') ),
+                                                        ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color(0xff03002e),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),onPressed: (){Navigator.pop(context);Navigator.pop(context);}, child: Text('Cancel')),
+                                                      ],
+                                                    );
+                                                  });
+                                                }, child: Center(
+                                                  child: Row(
+                                                    children: [
+                                                      SizedBox(width: 120,),
+                                                      Icon(Icons.delete,size: 40,),
+                                                      SizedBox(width: 20,),
+                                                      Text("Delete",style: TextStyle(color:Color(0xff03002e),fontSize: 30)),
+                                                    ],
+                                                  ),
+                                                ),)
                                               ],
                                             );
                                           });
-                                        }, icon: Icon(Icons.delete))
+                                        }, icon: Icon(Icons.more_vert)),
+                                        // IconButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>show_event(titleupdated: docs[index]['title'], descriptionupdated: docs[index]['description'], timetime: (docs[index]['time']).toString(),)));}, icon: Icon(Icons.edit)),
+                                        // IconButton(onPressed: (){
+                                        //   showDialog(context: context, builder: (context){
+                                        //     return AlertDialog(
+                                        //       iconColor: Color(0xff03002e),
+                                        //       title: Text('Delete item?'),
+                                        //       actions: [
+                                        //         ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color(0xff03002e),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),onPressed: (){ FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').doc(docs[index]['time']).delete();Fluttertoast.showToast(msg: 'Item Deleted');Navigator.pop(context);}, child:Text('Delete') ),
+                                        //         ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Color(0xff03002e),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),onPressed: (){Navigator.pop(context);}, child: Text('Cancel'))
+                                        //       ],
+                                        //     );
+                                        //   });
+                                        // }, icon: Icon(Icons.delete))
                                       ],
                                     ),
                                   ),
                                   Divider(color: Colors.blueGrey,),
                                   Row(
                                     children: [
+                                      SizedBox(width: 5,),
                                       Text('Description: '),
                                       //Expanded(child: Text(docs[index]['description'])),
                                     ],

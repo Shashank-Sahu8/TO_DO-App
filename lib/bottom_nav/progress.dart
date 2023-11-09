@@ -40,6 +40,7 @@ class _progressState extends State<progress> {
   //     uid=_auth.currentUser!.uid;
   //   });
   // }
+  //final c=FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').snapshots() as int;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +115,7 @@ class _progressState extends State<progress> {
                         itemCount: docs.length,
                         itemBuilder: (context,index){
                           var time=(docs[index]['timestamp'] as Timestamp).toDate();
-                          return docs[index]['state'].toString()=='false'?Text(""):InkWell(
+                          return docs[index]['state'].toString()=='false'?SizedBox():InkWell(
                             onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>description(title:docs[index]['title'], des: docs[index]['description'], time:docs[index]['time'], state: docs[index]['state'].toString() ,)));},
                             child: Padding(
                               padding: const EdgeInsets.only(top:15.0),

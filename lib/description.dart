@@ -68,7 +68,7 @@ class _descriptionState extends State<description> {
               SizedBox(height: 10,),
               Divider(),
               SizedBox(height: 10,),
-              Text("Task Description : "),
+              widget.state.toString()=='true'?Text("Completed Task : "):Text("Task Description : "),
               SizedBox(height: 5,),
               Expanded(child: Padding(
                 padding: const EdgeInsets.only(left:100.0),
