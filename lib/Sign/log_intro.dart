@@ -63,7 +63,7 @@ class _logintroState extends State<logintro> {
                     fontSize: 15,
                     fontWeight: FontWeight.w400),),
             ),
-            SizedBox(height: 40,),
+            SizedBox(height: 30,),
             InkWell(
               onTap: () {
                 Navigator.push(
@@ -124,7 +124,7 @@ class _logintroState extends State<logintro> {
                 ],
               ),
             ),
-            SizedBox(height: 5,),
+            // SizedBox(height: 5,),
             Row(mainAxisAlignment: MainAxisAlignment.center,
               children: [
                  ElevatedButton(
@@ -136,7 +136,7 @@ class _logintroState extends State<logintro> {
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.white,shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.asset('assets/google_icon.png', height: 35),
+                      Image.asset('assets/google_icon.png', height: 40),
                       Text("Sign up with Google",style: TextStyle(color: Color(0xff03002e),fontSize: 13),)
                     ],
                   ),),

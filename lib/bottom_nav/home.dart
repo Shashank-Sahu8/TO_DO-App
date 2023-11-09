@@ -57,12 +57,7 @@ class _homepageState extends State<homepage> {
           IconButton(onPressed: (){showSearch(context: context, delegate: Search());}, icon: Icon(Icons.search,color: Color(0xff03002e),)),
           SizedBox(width: 10,),
         ],
-        title: Row(
-          children: [
-            Text(c.toString()),
-            Text('Tasks',style: GoogleFonts.lato(fontSize: 26,fontWeight:FontWeight.w900,color: Color(0xff03002e)),),
-          ],
-        ),
+        title: Text('Tasks',style: GoogleFonts.lato(fontSize: 26,fontWeight:FontWeight.w900,color: Color(0xff03002e)),),
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,

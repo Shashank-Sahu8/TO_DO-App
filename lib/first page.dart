@@ -59,72 +59,79 @@ class _page_1State extends State<page_1> {
         ],
 
       ),
-      body: Column(mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CarouselSlider(
-            items:  imageList.map(
-                  (item)=>Image.asset(item['image_path'],
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-            ) .toList(),
-            carouselController: carouselController,
-            options: CarouselOptions(
-                scrollPhysics: const BouncingScrollPhysics(),
-                autoPlay: true,
+      body: Container(
+        height: 800,
+        child: Column(mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CarouselSlider(
+              items:  imageList.map(
+                    (item)=>Image.asset(item['image_path'],
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
+              ) .toList(),
+              carouselController: carouselController,
+              options: CarouselOptions(
+                  scrollPhysics: const BouncingScrollPhysics(),
+                  autoPlay: true,
 
-                aspectRatio: 1.4,
-                viewportFraction: 1,
-                onPageChanged: (index,reason){
-                  setState(() {
-                    car_currentindex=index;
-                  });
-                }
-            ),
-          ),
-            new DotsIndicator(
-              decorator: DotsDecorator(activeColor: Color(0xff03002e)),
-            dotsCount: imageList.length,
-            position: car_currentindex,
-            ),
-          SizedBox(height: 30,),
-          Row(mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('To_Do',style: TextStyle(color: Color(0xff03002e),fontSize: 26,fontWeight: FontWeight.w600),)
-            ],
-          ),
-          SizedBox(height: 20
-            ,),
-          Row(mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(Bootstrap.dot),
-                      Text("Unable to manage your time ?"),
-                    ],
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(Bootstrap.dot),
-                      Text("Still confused ?"),
-                    ],
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(Bootstrap.dot),
-                      Text("Relax !"),
-                    ],
-                  )
-                ],
+                  aspectRatio: 1.4,
+                  viewportFraction: 1,
+                  onPageChanged: (index,reason){
+                    setState(() {
+                      car_currentindex=index;
+                    });
+                  }
               ),
-            ],
-          ),
-          SizedBox(height: 40,),
-          Padding(
-            padding: const EdgeInsets.only(left: 60.0,right: 60),
-            child: Expanded(
+            ),
+              Container(
+                child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    new DotsIndicator(
+                      decorator: DotsDecorator(activeColor: Color(0xff03002e)),
+                    dotsCount: imageList.length,
+                    position: car_currentindex,
+                    ),
+                  ],
+                ),
+              ),
+            SizedBox(height: 30,),
+            Row(mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('To_Do',style: TextStyle(color: Color(0xff03002e),fontSize: 26,fontWeight: FontWeight.w600),)
+              ],
+            ),
+            SizedBox(height: 20
+              ,),
+            Row(mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(mainAxisAlignment: MainAxisAlignment.start,crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(Bootstrap.dot),
+                        Text("Unable to manage your time ?"),
+                      ],
+                    ),
+                    Row(mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(Bootstrap.dot),
+                        Text("Still confused ?"),
+                      ],
+                    ),
+                    Row(mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(Bootstrap.dot),
+                        Text("Relax !"),
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 40,),
+            Padding(
+              padding: const EdgeInsets.only(left: 60.0,right: 60),
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor:Color(0xff03002e),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),minimumSize: Size(50, 50)),
                   onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>islogein()));},
@@ -135,9 +142,9 @@ class _page_1State extends State<page_1> {
                     ],
                   )
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
