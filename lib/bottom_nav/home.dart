@@ -62,11 +62,11 @@ class _homepageState extends State<homepage> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: StreamBuilder(stream:FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').snapshots() ,
+        child: StreamBuilder(stream:FirebaseFirestore.instance.collection('tasks').doc(uid).collection('mytasks').snapshots(),
           builder: (context,snapshots){
             if(snapshots.connectionState==ConnectionState.waiting)
             {
-              return const Center(child: CircularProgressIndicator(),);
+              return const Center(child:CircularProgressIndicator(),);
             }
             else
             {
